@@ -1,150 +1,46 @@
-<h1 align="center">
-  <br />
-  <img
-    src="./_docs/assets/icon.png"
-    alt="Mega Man Robots API"
-    width="150"
-  />
-  <br />
-  <b>Mega Man Robots API</b>
-  <br />
-  <sub
-    ><sup><b>(MEGA-MAN-ROBOTS)</b></sup></sub
-  >
-  <br />
-  <a
-    href="https://github.com/felipeAguiarCode/MegaApiDotnetCore/actions/workflows/build.yml"
-  >
-    <img
-      src="https://github.com/felipeAguiarCode/MegaApiDotnetCore/actions/workflows/build.yml/badge.svg"
-      alt=""
-    />
-  </a>
-  <a href="https://github.com/felipeAguiarCode/MegaApiDotnetCore/releases/latest">
-    <img
-      src="https://img.shields.io/github/v/release/felipeAguiarCode/MegaApiDotnetCore"
-      alt="Latest Release"
-    />
-  </a>
-</h1>
+# 🧾 Visão Geral do Projeto — API SCAC v2.1.63 (empresaXX)
 
-<p align="center">
-  This .NET Core API is designed to serve JSON formatted data about bosses from
-  the Mega Man series. It is a backend service built with .NET Core 3.1 and
-  various modern dependencies for data management and API response handling.
-  <br />
-</p>
+## 📌 O que é a API SCAC?
 
-<p align="center">
-  Developed with Entity Framework Core and other modern .NET technologies, this
-  project aims to provide a robust API for accessing Mega Man robot data.
-  <br />
-</p>
+A **SCAC (Sistema de Controle de Acesso Corporativo)** é uma API RESTful desenvolvida para integrar dispositivos de controle de acesso físico com o servidor central da empresaXX. Ela permite automatizar o controle de entrada e saída de unidades físicas com segurança, rastreabilidade e integração com sistemas internos.
 
-<p align="center">
-  <br />
-  <img src="./_docs/assets/carbon.png" />
-</p>
+## 🗂️ Seções Principais da Documentação
 
-## API Endpoints
+- **1. Visão Geral** — Introdução, versão, formato e uso geral da API.
+- **2. Autenticação** — Métodos permitidos (APIKey, rede interna).
+- **3. Recursos da API** — Endpoints categorizados por funcionalidades.
+- **4. Esquemas de Dados** — Estrutura dos objetos JSON usados na comunicação.
+- **5. Formatos de Resposta** — Tipos de retorno esperados.
+- **6. Fluxo de Uso** — Diagrama sequencial do ciclo de comunicação.
+- **7. Considerações Finais** — Recomendações de segurança e boas práticas.
+- **8. Prompts para IA** — Sugestões de perguntas para assistentes.
+- **9. Banco de Dados e Integrações** — Sugestões técnicas de armazenamento.
+- **10. Segurança e Observações** — Conformidade LGPD, criptografia, monitoramento.
 
-<table align="center">
-  <tr>
-    <th>Method</th>
-    <th>Endpoint</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>GET</td>
-    <td>/api/v1/robots</td>
-    <td>Returns a list of all robots</td>
-  </tr>
-  <tr>
-    <td>GET</td>
-    <td>/api/v1/robots/{id}</td>
-    <td>Returns details of a specific robot by ID</td>
-  </tr>
-  <tr>
-    <td>POST</td>
-    <td>/api/v1/robots</td>
-    <td>Endpoint to create a new robot entry</td>
-  </tr>
-</table>
+## 🔁 Fluxo de Informação (Resumo)
 
-## Techniques Used
 
-<p align="center">
-  - <b>Entity Framework Core:</b> ORM for data management.<br />
-  - <b>RESTful API Design:</b> Ensures clear and effective communication
-  endpoints.<br />
-  - <b>Dependency Injection:</b> Used throughout to promote loose coupling and
-  enhanced testability.<br />
-</p>
+1. A controladora envia um GET para verificar compatibilidade.
+2. Sincroniza registros offline com o backend (POST /sync).
+3. Um agente solicita abertura da agência (POST /abertura).
+4. O sistema valida autenticação via PIN ou biometria.
+5. Sincroniza os dados do usuário (POST /sync-user).
+6. Define o tipo de custódia exigida na unidade.
+7. Registra logs e status no banco interno da empresaXX.
+⚙️ Aplicações Práticas
+Controle de entrada e saída de vigilantes, técnicos e auditores.
 
-## Dependencies
+Abertura remota e fechamento automatizado de unidades.
 
-<table align="center">
-  <tr>
-    <th>Package</th>
-    <th>Version</th>
-    <th>Link</th>
-  </tr>
-  <tr>
-    <td>Microsoft.EntityFrameworkCore</td>
-    <td>3.1.8</td>
-    <td>
-      <a
-        href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.1.8"
-        >NuGet</a
-      >
-    </td>
-  </tr>
-  <tr>
-    <td>Microsoft.EntityFrameworkCore.Design</td>
-    <td>3.1.8</td>
-    <td>
-      <a
-        href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/3.1.8"
-        >NuGet</a
-      >
-    </td>
-  </tr>
-  <tr>
-    <td>Microsoft.EntityFrameworkCore.SqlServer</td>
-    <td>3.1.8</td>
-    <td>
-      <a
-        href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/3.1.8"
-        >NuGet</a
-      >
-    </td>
-  </tr>
-  <tr>
-    <td>Newtonsoft.Json</td>
-    <td>12.0.2</td>
-    <td>
-      <a href="https://www.nuget.org/packages/Newtonsoft.Json/12.0.2">NuGet</a>
-    </td>
-  </tr>
-</table>
+Registro e resposta a eventos como tentativas forçadas de acesso.
 
-## :gear: Arch
+Integração com sistemas de segurança, CRMs e orquestradores de dados.
 
-```🌐
-src
-├── 📂 Controllers      [Routes for endpoints]
-├── 📂 Models           [Database models]
-├── 📂 Services         [Business rules]
-├── 📂 Middlewares      [Intermediate functions between the HTTP request and the final server response]
-├── 📂 Database         [Structures related to the database]
-│   ├── 📂 DTOs             [Input Models and View Models (Data Transfer Objects)]
-│   ├── 📂 EntityFramework  [Files related to the ORM Entity Framework]
-│   │     ├── 📂 Context         [Entity context settings]
-│   │     ├── 📂 Migrations      [Migrations for database updates]
-│   ├── 📂 Repositories     [Repository pattern]
-```
+✅ Benefícios
+Redução de erros operacionais
 
-## License This software is licensed under the terms of the [MIT]
+Acesso seguro e rastreável
 
-⌨️ FelipeAguiar -
-[Github](https://github.com/felipeAguiarCode)
+Integração com dispositivos físicos
+
+Conformidade com LGPD e políticas corporativas
